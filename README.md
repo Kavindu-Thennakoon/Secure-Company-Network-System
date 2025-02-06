@@ -2,7 +2,7 @@
 
 ## 🏢 Company: Cytonn Innovation Ltd  
 **Author:** Kavindu Thennakoon  
-**Tools Used:** Cisco Packet Tracer, GNS3, Wireshark, Virtual Machines  
+**Tools Used:** Cisco Packet Tracer 
 **Technologies:** Cisco ASA Firewall, VLANs, OSPF, HSRP, DHCP, DNS, VPN, VoIP, EtherChannel  
 
 ---
@@ -77,4 +77,70 @@ access-list OUTSIDE_IN extended permit tcp any host 10.11.11.3 eq 443
 global (outside) 1 interface
 nat (inside, outside) dynamic interface
 ```
+
+### 🛡 Standard ACL for SSH
+```bash
+access-list 10 permit 192.168.10.5
+line vty 0 4
+ access-class 10 in
+ transport input ssh
+```
+
+### 🛡 BPDU Guard & Port Security
+```bash
+interface FastEthernet0/1
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ spanning-tree bpduguard enable
+```
+
+### 🛡 OSPF Configuration
+```bash
+router ospf 1
+ network 192.168.10.0 0.0.0.255 area 0
+ network 10.20.0.0 0.0.255.255 area 1
+```
+
+## 🌐 Wireless Network Configuration
+```bash
+configure terminal
+interface Dot11Radio0
+ ssid CorporateWiFi
+ authentication open
+ authentication key-management wpa
+ wpa-psk ascii "Cisco123"
+```
+## ☎ VoIP Configuration 
+```bash
+telephony-service
+ max-ephones 50
+ max-dn 100
+ ip source-address 172.30.0.1 port 2000
+ auto assign 1 to 100
+```
+### 🛠 Final Testing & Troubleshooting
+| Issue | 	Solution |
+|------------------|--------------|
+| Devices not getting IPs | Check DHCP bindings & helper addresses |
+| Inter-VLAN communication failing | Verify 'ip routing' & VLAN trunking |
+| Firewall blocking access | 'Check access-list' & NAT rules |
+| Slow network speeds | Analyze EtherChannel & STP config |
+
+## 📌 Future Enhancements
+🚀 **Integrate VPN** for secure remote access
+🚀 **Implement Network** Monitoring using SNMP & Syslog
+🚀 **Deploy Redundant Firewalls** for failover support
+🚀 **Enable Multi-Factor Authentication** for added security
+
+## 🔄 How to Run this Project
+1️⃣ Open **Cisco Packet Tracer**
+2️⃣ Load the .pkt project file
+3️⃣ Configure devices using the provided scripts
+4️⃣ Test connectivity & security policies
+5️⃣ Deploy on a **real-world Cisco network**
+
+##**✅ If you liked this project, don't forget to ⭐ star the repo!**
+
 
