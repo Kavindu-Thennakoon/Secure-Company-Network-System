@@ -24,7 +24,7 @@ Cytonn Innovation Ltd is moving to a new building and requires a **secure and sc
 
 ## 📡 Network Diagram
 
-![Network Diagram]([Diagrams/network-diagram.png](https://github.com/Kavindu-Thennakoon/Secure-Company-Network-System/blob/eb654d267bf2d3949abbadf6c1c1f0351246dcee/Network%20Diagram.png))
+![Diagrams/network-diagram.png](https://github.com/Kavindu-Thennakoon/Secure-Company-Network-System/blob/eb654d267bf2d3949abbadf6c1c1f0351246dcee/Network%20Diagram.png)
 
 
 ### 📌 Logical Network Design
