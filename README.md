@@ -51,6 +51,7 @@ vlan 70
  name VoIP
 vlan 100
  name DMZ
+```
 
 ## 🔐 Security Implementations
 ### 🛡 Cisco ASA Firewall Configuration
@@ -75,5 +76,5 @@ access-list OUTSIDE_IN extended permit tcp any host 10.11.11.3 eq 443
 
 global (outside) 1 interface
 nat (inside, outside) dynamic interface
-
+```
 
