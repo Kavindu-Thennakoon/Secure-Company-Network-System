@@ -83,7 +83,6 @@ line console 0
  password CytonnConsole
  login
 exit
-
 ### VLAN and Network Configuration
 ```cisco
 vlan 10
@@ -97,7 +96,6 @@ vlan 70
 vlan 199
  name Blackhole
 exit
-
 ### VLAN Interface Assignment
 ```cisco
 interface GigabitEthernet1/0/1
