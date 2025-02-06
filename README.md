@@ -128,11 +128,13 @@ telephony-service
 | Firewall blocking access | 'Check access-list' & NAT rules |
 | Slow network speeds | Analyze EtherChannel & STP config |
 
+
 ## 📌 Future Enhancements
 🚀 **Integrate VPN** for secure remote access
 🚀 **Implement Network** Monitoring using SNMP & Syslog
 🚀 **Deploy Redundant Firewalls** for failover support
 🚀 **Enable Multi-Factor Authentication** for added security
+
 
 ## 🔄 How to Run this Project
 1️⃣ Open **Cisco Packet Tracer**
@@ -141,6 +143,7 @@ telephony-service
 4️⃣ Test connectivity & security policies
 5️⃣ Deploy on a **real-world Cisco network**
 
-##**✅ If you liked this project, don't forget to ⭐ star the repo!**
+
+## ✅ If you liked this project, don't forget to ⭐ star the repo!
 
 
