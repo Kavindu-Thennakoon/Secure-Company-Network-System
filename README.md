@@ -1,90 +1,79 @@
-# Secure Company Network System for Cytonn Innovation Ltd.
+# 📌 Design and Implementation of a Secure Company Network System
 
-![Network Diagram](https://drive.google.com/file/d/1NczpH6i-kyMnjJBxKE5eSw-6FGVd8QIx/view?usp=sharing)  
-*Figure 1: High-level network architecture for Cytonn Innovation Ltd.*
-
-## 🌟 Project Overview
-Cytonn Innovation Ltd is a fast-growing company specializing in cutting-edge cloud solutions. With the move to a new three-floor building housing 600 employees, this project outlines the design and implementation of a secure, scalable, and high-availability network infrastructure. The system ensures robust security, redundancy, and future-proof scalability to support the company's growth.
-
----
-
-## 🏢 Building Structure and Departmental Layout
-The new building accommodates the following departments across three floors:
-- **Sales and Marketing**
-- **Human Resources and Logistics**
-- **Finance and Accounts**
-- **Administration and Public Relations**
-- **ICT Department** (Software Developers, Cloud Engineers, Cybersecurity Engineers, Network Engineers, System Administrators, IT Support Specialists, Business Analysts, and Project Managers)
-- **Server Room** (Hosting critical IT infrastructure)
+## 🏢 Company: Cytonn Innovation Ltd  
+**Author:** Kavindu Thennakoon  
+**Tools Used:** Cisco Packet Tracer, GNS3, Wireshark, Virtual Machines  
+**Technologies:** Cisco ASA Firewall, VLANs, OSPF, HSRP, DHCP, DNS, VPN, VoIP, EtherChannel  
 
 ---
 
-## 🔒 Network Security and Architecture
-### Multi-Layered Security Approach
-To safeguard the network from internal and external threats, the following security measures are implemented:
-- **Cisco ASA Firewalls (5500-X series)**: Dual firewalls for redundancy and failover.
-- **Security Zones**:
-  - **Inside Zone**: AD servers (DHCP, DNS, Radius) for internal management.
-  - **DMZ**: FTP, Web, Email, Application, and NAS storage servers.
-  - **Outside Zone**: Two ISPs (SEACOM & Safaricom) for external connectivity.
+## 📜 Project Overview
+
+Cytonn Innovation Ltd is moving to a new building and requires a **secure and scalable** network infrastructure. The goal is to design and implement a **corporate network** that ensures high performance, security, and redundancy across multiple departments.
+
+### 🔹 Key Features:
+✔ **Dual ISP Redundancy** using SEACOM & Safaricom.  
+✔ **Cisco ASA Firewalls** for security zoning (Inside, Outside, DMZ).  
+✔ **Hierarchical Network Design** for efficiency and scalability.  
+✔ **Wireless & VoIP Integration** for seamless communication.  
+✔ **Advanced Security Mechanisms** (ACLs, BPDU Guard, Port Security).  
 
 ---
 
-## 🛠 Networking Components
-### Internet Service Providers (ISPs)
-- **SEACOM**: Public IP range `105.100.50.0/30`
-- **Safaricom**: Public IP range `197.200.100.0/30`
+## 🏗 Network Architecture
 
-### Routing and Switching
-- **Core Switches**: Catalyst 3850 48-Port switches for centralized connectivity.
-- **Access Switches**: Catalyst 2960 48-Port switches for end-user devices.
-- **Routing Protocol**: OSPF for internal routing with static and dynamic routing on firewalls and switches.
+### 📌 Logical Network Design
+The network is structured across three floors, with designated departments:  
+- **1st Floor:** Sales & Marketing, Human Resources, Logistics  
+- **2nd Floor:** Finance, Administration, Public Relations  
+- **3rd Floor:** ICT Department (Software Devs, Cybersecurity, IT Support, Network Engineers)  
 
-### Wireless Infrastructure
-- **Cisco Wireless LAN Controller (WLC)**: Manages Lightweight Access Points (LAPs) across floors.
-- **Wireless Networks**: Separate SSIDs for employees, guests, and auditors.
+### 📌 IP Addressing Scheme
+| Network Component | Subnet Range | VLAN ID |
+|------------------|--------------|---------|
+| **Management Network** | `192.168.10.0/24` | 10 |
+| **LAN** | `172.16.0.0/16` | 20 |
+| **WLAN** | `10.20.0.0/16` | 50 |
+| **VoIP** | `172.30.0.0/16` | 70 |
+| **DMZ** | `10.11.11.0/27` | 100 |
+| **Public IPs (SEACOM)** | `105.100.50.0/30` | - |
+| **Public IPs (Safaricom)** | `197.200.100.0/30` | - |
 
-### VoIP Services
-- **Cisco Voice Gateway**: Manages IP phones and assigns dial numbers in the `4xxx` format.
+### 📌 VLAN Configuration
+```bash
+vlan 10
+ name Management
+vlan 20
+ name LAN
+vlan 50
+ name WLAN
+vlan 70
+ name VoIP
+vlan 100
+ name DMZ
 
----
+## 🔐 Security Implementations
+### 🛡 Cisco ASA Firewall Configuration
+```bash
+interface GigabitEthernet0/0
+ nameif outside
+ security-level 0
+ ip address 105.100.50.1 255.255.255.252
 
-## 📡 IP Addressing and VLANs
-The network is segmented into VLANs for security and structure:
-| VLAN ID | Name          | IP Range           | Purpose                     |
-|---------|---------------|--------------------|-----------------------------|
-| 10      | Management    | 192.168.10.0/24    | Network management          |
-| 20      | LAN           | 172.16.0.0/16      | Internal LAN                |
-| 50      | WLAN          | 10.20.0.0/16       | Wireless LAN                |
-| 70      | VoIP          | 172.30.0.0/16      | Voice over IP               |
-| 100     | DMZ           | 10.11.11.0/27      | Demilitarized Zone          |
-| 199     | Blackhole     | Reserved           | Unused ports                |
+interface GigabitEthernet0/1
+ nameif inside
+ security-level 100
+ ip address 192.168.10.1 255.255.255.0
 
----
+interface GigabitEthernet0/2
+ nameif dmz
+ security-level 50
+ ip address 10.11.11.1 255.255.255.224
 
-## 🚀 Technical Requirements
-- **Cisco Packet Tracer**: Used for design and simulation.
-- **Hierarchical Network Model**: Ensures scalability and redundancy.
-- **HSRP**: High availability routing for failover.
-- **EtherChannel (LACP)**: Enhances link aggregation efficiency.
-- **Inter-VLAN Routing**: Configured on multilayer switches.
-- **DHCP Server**: For dynamic IP allocation.
-- **Static Addressing**: For DMZ and critical infrastructure.
-- **ACLs for SSH**: Restricts access to core devices.
-- **BPDUguard & STP PortFast**: Prevents network loops and speeds up convergence.
-- **Firewall Policies**: Defines security zones and ACLs.
+access-list OUTSIDE_IN extended permit tcp any host 10.11.11.2 eq 80
+access-list OUTSIDE_IN extended permit tcp any host 10.11.11.3 eq 443
 
----
+global (outside) 1 interface
+nat (inside, outside) dynamic interface
 
-## ⚙ Configuration Steps
-### Initial Setup
-```cisco
-hostname CoreSwitch1
-no ip domain-lookup
-service password-encryption
-enable secret CytonnSecure
-banner motd #Unauthorized access is prohibited#
-line console 0
- password CytonnConsole
- login
-exit
+
