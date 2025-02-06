@@ -1,6 +1,6 @@
 # Secure Company Network System for Cytonn Innovation Ltd.
 
-![Network Diagram](https://via.placeholder.com/800x400.png?text=Network+Diagram)  
+![Network Diagram](https://drive.google.com/file/d/1NczpH6i-kyMnjJBxKE5eSw-6FGVd8QIx/view?usp=sharing)  
 *Figure 1: High-level network architecture for Cytonn Innovation Ltd.*
 
 ## 🌟 Project Overview
