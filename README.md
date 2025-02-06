@@ -53,6 +53,8 @@ vlan 100
  name DMZ
 ```
 
+---
+
 ## 🔐 Security Implementations
 ### 🛡 Cisco ASA Firewall Configuration
 ```bash
@@ -103,6 +105,8 @@ router ospf 1
  network 10.20.0.0 0.0.255.255 area 1
 ```
 
+---
+
 ## 🌐 Wireless Network Configuration
 ```bash
 configure terminal
@@ -112,6 +116,9 @@ interface Dot11Radio0
  authentication key-management wpa
  wpa-psk ascii "Cisco123"
 ```
+
+---
+
 ## ☎ VoIP Configuration 
 ```bash
 telephony-service
@@ -120,7 +127,10 @@ telephony-service
  ip source-address 172.30.0.1 port 2000
  auto assign 1 to 100
 ```
-### 🛠 Final Testing & Troubleshooting
+
+---
+
+## 🛠 Final Testing & Troubleshooting
 | Issue | 	Solution |
 |------------------|--------------|
 | Devices not getting IPs | Check DHCP bindings & helper addresses |
@@ -128,6 +138,7 @@ telephony-service
 | Firewall blocking access | 'Check access-list' & NAT rules |
 | Slow network speeds | Analyze EtherChannel & STP config |
 
+---
 
 ## 📌 Future Enhancements
 🚀 **Integrate VPN** for secure remote access
@@ -135,6 +146,7 @@ telephony-service
 🚀 **Deploy Redundant Firewalls** for failover support
 🚀 **Enable Multi-Factor Authentication** for added security
 
+---
 
 ## 🔄 How to Run this Project
 1️⃣ Open **Cisco Packet Tracer**
@@ -143,6 +155,7 @@ telephony-service
 4️⃣ Test connectivity & security policies
 5️⃣ Deploy on a **real-world Cisco network**
 
+---
 
 ## ✅ If you liked this project, don't forget to ⭐ star the repo!
 
